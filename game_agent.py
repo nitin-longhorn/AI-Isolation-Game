@@ -13,7 +13,7 @@ class Timeout(Exception):
 
 
 def custom_score(game, player):
-    """ This heurisitic takes into account the following factors
+    """ This heuristic takes into account the following factors
     1. How much of the game has been played each time the score is being computed
     2. Who the active player is
     3. Deducting points for corner positions for the agent
@@ -39,10 +39,10 @@ def custom_score(game, player):
 
     # Get the total number of Moves available for the agent
     my_legal_moves = len(game.get_legal_moves(player))
-    if player == game.__player_1__:
-        opponent_player = game.__player_2__
+    if player == game._player_1:
+        opponent_player = game._player_2
     else:
-        opponent_player = game.__player_1__
+        opponent_player = game._player_1
     # Get the total number of Moves available for the Opponent
     opponent_legal_moves = len(game.get_legal_moves(opponent_player))
 
@@ -98,10 +98,10 @@ def custom_score_1(game, player):
     # Reward agent for being close to center and if opponent is further away from center
 
     # Identify player and opponent
-    if player == game.__player_1__:
-        opponent_player = game.__player_2__
+    if player == game._player_1:
+        opponent_player = game._player_2
     else:
-        opponent_player = game.__player_1__
+        opponent_player = game._player_1
 
     # Agent Location = x1,y1
     x1,y1 = game.get_player_location(player)
@@ -124,10 +124,10 @@ def custom_score_2(game, player):
     # Reward agent for being far away from opponent and for opponent being close to corner
 
     # Get the total number of Moves available for the agent
-    if player == game.__player_1__:
-        opponent_player = game.__player_2__
+    if player == game._player_1:
+        opponent_player = game._player_2
     else:
-        opponent_player = game.__player_1__
+        opponent_player = game._player_1
 
     x1, y1 = game.get_player_location(player)
     x2, y2 = game.get_player_location(opponent_player)
@@ -161,13 +161,9 @@ class CustomPlayer:
         A function to use for heuristic evaluation of game states.
     iterative : boolean (optional)
         Flag indicating whether to perform fixed-depth search (False) or
-<<<<<<< HEAD
-        iterative deepening search (True).
-=======
         iterative deepening search (True).  When True, search_depth should
         be ignored and no limit to search depth.
 
->>>>>>> origin/master
     method : {'minimax', 'alphabeta'} (optional)
         The name of the search method to use in get_move().
     timeout : float (optional)
@@ -202,13 +198,7 @@ class CustomPlayer:
             An instance of `isolation.Board` encoding the current state of the
             game (e.g., player locations and blocked cells).
         legal_moves : list<(int, int)>
-<<<<<<< HEAD
-            A list containing legal moves. Moves are encoded as tuples of pairs
-            of ints defining the next (row, col) for the agent to occupy.
-=======
             DEPRECATED -- This argument will be removed in the next release
-
->>>>>>> origin/master
         time_left : callable
             A function that returns the number of milliseconds left in the
             current turn. Returning with any less than 0 ms remaining forfeits
@@ -261,7 +251,6 @@ class CustomPlayer:
 
 
     # Return the best move from the last completed search iteration
-    #raise NotImplementedError
 
 
     def minimax(self, game, depth, maximizing_player=True):
@@ -294,7 +283,6 @@ class CustomPlayer:
             raise Timeout()
 
 
-        ###         Backup
         # At final depth, return the score computed by the evaluation function that is
         # written in the custom_score function
         if depth == 0:
@@ -381,7 +369,6 @@ class CustomPlayer:
         if self.time_left() < self.TIMER_THRESHOLD:
             raise Timeout()
 
-        #################  Back-up
         # At final depth, return the score computed by the evaluation function that is
         # # written in the custom_score function
         if depth == 0:
